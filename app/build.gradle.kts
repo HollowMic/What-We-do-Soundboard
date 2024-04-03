@@ -68,4 +68,5 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
     implementation("androidx.compose.material3:material3:1.3.0-alpha03")
+    implementation("com.google.code.gson:gson:2.8.8")
 }
