@@ -1,11 +1,17 @@
 package com.example.newyorkcity
 
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Button
@@ -42,9 +48,8 @@ fun SoundGrid() {
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { mediaController.playSound(0) },
+                onClick = { mediaController.playSound(Sound("")) },
                 containerColor = Color(255, 113, 103, 255)
-
             ) {
                 Icon(contentDescription = "", painter = painterResource(id = R.drawable.baseline_stop_24))
             }
@@ -60,7 +65,7 @@ fun SoundGrid() {
                     if (soundItem != null) {
                         SoundButton(soundItem) {
                             mediaController.playSound(
-                                soundItem.getPath()
+                                soundItem
                             )
                         }
                     }
@@ -80,6 +85,12 @@ fun SoundGrid() {
                 },
                 sheetState = sheetState
             ) {
+
+                var result by remember { mutableStateOf<Uri?>(null) }
+                val launcher = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) {
+                    result = it
+                }
+
                 var name by remember { mutableStateOf("") }
                 Box(
                     modifier = Modifier
@@ -96,11 +107,33 @@ fun SoundGrid() {
                             label = { Text("Name") }
                         )
                         Button(
-                            modifier = Modifier.fillMaxWidth().padding(10.dp),
-                            onClick = { /*TODO*/ }
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(10.dp),
+                            onClick = { launcher.launch(arrayOf("*/*")) }
                         ) {
                             Text(text = "Upload MP3")
                         }
+                        Text(text = result.toString())
+                        if (result != null) {
+                            Row(
+                                horizontalArrangement = Arrangement.End
+                            ) {
+                                Button(
+                                    modifier = Modifier
+                                        .width(100.dp)
+                                        .padding(10.dp),
+                                    onClick = {
+                                        result?.let { soundLibrary.addSound(Sound(name, uri = it)) }
+                                        showBottomSheet = false
+                                    }
+                                ) {
+                                    Text(text = "Add")
+                                }
+                            }
+                        }
+
+
                     }
                 }
             }

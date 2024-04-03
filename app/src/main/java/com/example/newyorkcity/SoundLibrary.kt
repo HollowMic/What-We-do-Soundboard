@@ -1,7 +1,7 @@
 package com.example.newyorkcity
 
 class SoundLibrary {
-    private val listOfSounds = listOf(
+    private val listOfSounds = mutableListOf(
         Sound("New York City", R.raw.you_really_are_the_most_devious_bastard_in_new_york_city),
         Sound("Creature of the Night", R.raw.creature_of_the_night),
         Sound("Beg your Pardon", R.raw.beg_your_pardon),
@@ -40,5 +40,9 @@ class SoundLibrary {
         } else {
             null
         }
+    }
+
+    fun addSound(sound: Sound) {
+        listOfSounds.add(sound)
     }
 }
