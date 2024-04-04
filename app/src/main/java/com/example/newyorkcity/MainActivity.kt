@@ -1,6 +1,7 @@
 package com.example.newyorkcity
 
 import android.Manifest
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -30,13 +31,24 @@ class MainActivity : ComponentActivity() {
                         if (isGranted) {
                             // Permission granted, handle accordingly
                             // For example, you can proceed with file operations here
+                            println("Permission was granted")
                         } else {
                             // Permission denied, handle accordingly
+                            println("Permission was denied")
                         }
                     }
 
                     Column {
-                        Button(onClick = { requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE) }) {
+                        Button(onClick = {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                                println("am new?")
+                                requestPermissionLauncher.launch(Manifest.permission.READ_MEDIA_AUDIO)
+                            } else {
+                                println("am old version?")
+                                requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+                            }
+                        }
+                        ) {
                             Text(text = "Request")
                         }
                         SoundGrid()
