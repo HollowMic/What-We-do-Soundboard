@@ -17,6 +17,7 @@ class MediaController(private val context: Context) {
             mediaPlayer = MediaPlayer.create(context, sound.getPath())
             mediaPlayer.start()
         } else if (sound.getUri() != Uri.Builder().build()) {
+            println("play sound from this Uri: ${sound.getUri()}")
             mediaPlayer = MediaPlayer.create(context, sound.getUri())
             mediaPlayer.start()
         } else {

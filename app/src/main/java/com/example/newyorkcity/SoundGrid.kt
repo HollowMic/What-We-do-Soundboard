@@ -41,6 +41,14 @@ fun SoundGrid() {
     val context = LocalContext.current
     val soundLibrary = remember { SoundLibrary() }
     val mediaController = remember { MediaController(context) }
+    val storageBox = remember { StorageBox(context) }
+    println("Loading sounds")
+    val soundsInStorage = storageBox.loadSounds()
+    println("After Loading sounds")
+    for (sound in soundsInStorage) {
+        println("For loop inside")
+        soundLibrary.addSound(sound)
+    }
 
     val sheetState = rememberModalBottomSheetState()
     var showBottomSheet by remember { mutableStateOf(false) }
@@ -124,7 +132,12 @@ fun SoundGrid() {
                                         .width(100.dp)
                                         .padding(10.dp),
                                     onClick = {
-                                        result?.let { soundLibrary.addSound(Sound(name, uri = it)) }
+                                        val newSound: Sound
+                                        result?.let {
+                                            newSound = Sound(name, uri = it)
+                                            soundLibrary.addSound(newSound)
+                                            storageBox.saveSound(newSound)
+                                        }
                                         showBottomSheet = false
                                     }
                                 ) {
@@ -132,8 +145,6 @@ fun SoundGrid() {
                                 }
                             }
                         }
-
-
                     }
                 }
             }
