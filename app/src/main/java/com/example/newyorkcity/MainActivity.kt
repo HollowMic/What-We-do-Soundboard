@@ -39,18 +39,18 @@ class MainActivity : ComponentActivity() {
                     }
 
                     Column {
-                        Button(onClick = {
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                                println("am new?")
-                                requestPermissionLauncher.launch(Manifest.permission.READ_MEDIA_AUDIO)
-                            } else {
-                                println("am old version?")
-                                requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
-                            }
-                        }
-                        ) {
-                            Text(text = "Request")
-                        }
+//                        Button(onClick = {
+//                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+//                                println("am new?")
+//                                requestPermissionLauncher.launch(Manifest.permission.READ_MEDIA_AUDIO)
+//                            } else {
+//                                println("am old version?")
+//                                requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+//                            }
+//                        }
+//                        ) {
+//                            Text(text = "Request")
+//                        }
                         SoundGrid()
                     }
 

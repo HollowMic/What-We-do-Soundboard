@@ -17,8 +17,14 @@ class SoundLibrary {
         Sound("Good Time Boy", R.raw.good_time_boy),
         Sound("Because I Killed Him", R.raw.because_i_killed_him),
         Sound("I Said I'm Sorry!", R.raw.i_said_im_sorry),
-//        Sound("Default", R.raw.you_really_are_the_most_devious_bastard_in_new_york_city),
-//        Sound("Default", R.raw.you_really_are_the_most_devious_bastard_in_new_york_city),
+        Sound("WTF Did You Just Say?", R.raw.wtf_did_you_just_say),
+        Sound("No, I've Gone Hard", R.raw.no_ive_gone_hard),
+        Sound("Gay is In, Gay is Hot \uD83C\uDFF3\uFE0F\u200D\uD83C\uDF08", R.raw.gay_is_in),
+        Sound("You're Not in Love", R.raw.youre_not_in_love),
+        Sound("Gizmo STFU!", R.raw.gismo_stfu),
+        Sound("Pizza Pie!", R.raw.pizza_pie),
+
+//
 //        Sound("Default", R.raw.you_really_are_the_most_devious_bastard_in_new_york_city),
 //        Sound("Default", R.raw.you_really_are_the_most_devious_bastard_in_new_york_city),
 //        Sound("Default", R.raw.you_really_are_the_most_devious_bastard_in_new_york_city),

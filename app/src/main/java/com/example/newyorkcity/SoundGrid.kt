@@ -8,8 +8,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -78,12 +80,24 @@ fun SoundGrid() {
                         }
                     }
                 }
+//                item {
+//                    SoundButton(Sound("Add Sound", 0)) {
+//                        showBottomSheet = true
+//                    }
+//                }
+                // Empty space below other buttons
                 item {
-                    SoundButton(Sound("Add Sound", 0)) {
-                        showBottomSheet = true
+                    var height = 100
+                    val length = soundLibrary.getLength()
+                    if (length % 3 == 0) {
+                        height = 100
+                    } else {
+                        height = 200
                     }
+                    Box(modifier = Modifier.padding(it).height(height.dp).fillMaxWidth().fillMaxSize().defaultMinSize(height.dp)) {}
                 }
             }
+
         }
 
         if (showBottomSheet) {
